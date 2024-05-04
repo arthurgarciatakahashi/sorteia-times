@@ -9,6 +9,8 @@ import {
   ListagemDeCidades,
   ListagemDePessoas,
 } from '../pages';
+import { ListagemDeJogadores } from '../pages/jogadores/ListagemDeJogadores';
+import { DetalheDejogadores } from '../pages/jogadores/DetalheDeJogadores';
 
 export const AppRoutes = () => {
   const { setDrawerOptions } = useDrawerContext();
@@ -30,6 +32,11 @@ export const AppRoutes = () => {
         path: '/pessoas',
         label: 'Pessoas',
       },
+      {
+        icon: 'sports_soccer',
+        path: '/jogadores',
+        label: 'Jogadores',
+      },
     ]);
   }, []);
 
@@ -42,6 +49,9 @@ export const AppRoutes = () => {
 
       <Route path="/cidades" element={<ListagemDeCidades />} />
       <Route path="/cidades/detalhe/:id" element={<DetalheDeCidades />} />
+
+      <Route path="/jogadores" element={<ListagemDeJogadores />} />
+      <Route path="/jogadores/detalhe/:id" element={<DetalheDejogadores />} />
 
       <Route path="*" element={<Navigate to="/pagina-inicial" />} />
     </Routes>

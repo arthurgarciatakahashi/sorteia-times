@@ -14,6 +14,7 @@ export const Environment = {
   LISTAGEM_VAZIA: 'Nenhum registro encontrado.',
   /**
    * Url base de consultado dos dados dessa aplicação
+   * URL_BASE: 'https://json-server-vercel-xi-lake.vercel.app/api/',
    */
-  URL_BASE: 'https://json-server-vercel-xi-lake.vercel.app/api/',
+  URL_BASE: 'http://localhost:3333'
 };
