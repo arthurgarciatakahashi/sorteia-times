@@ -7,6 +7,7 @@ export interface IListagemJogador {
   nome: string;
   posicao: string;
   nota: number;
+  ativo: string;
 }
 
 export interface IDetalheJogador {
@@ -14,6 +15,7 @@ export interface IDetalheJogador {
   nome: string;
   posicao: string;
   nota: number;
+  ativo: string;
 }
 
 type IJogadoresComTotalCount = {
@@ -31,6 +33,45 @@ const getAll = async (page = 1, filter = ''): Promise<IJogadoresComTotalCount | 
       return {
         data,
         totalCount: Number(headers['x-total-count'] || Environment.LIMITE_DE_LINHAS),
+      };
+    }
+
+    return new Error('Erro ao listar os registros.');
+  } catch (error) {
+    console.error(error);
+    return new Error((error as { message: string }).message || 'Erro ao listar os registros.');
+  }
+};
+
+const getAllForSort = async (): Promise<IJogadoresComTotalCount | Error> => {
+  try {
+    const urlRelativa = '/jogadores?_limit=100';
+
+    const { data, headers } = await Api.get(urlRelativa);
+
+    if (data) {
+      return {
+        data,
+        totalCount: Number(headers['x-total-count'] || 100),
+      };
+    }
+
+    return new Error('Erro ao listar os registros.');
+  } catch (error) {
+    console.error(error);
+    return new Error((error as { message: string }).message || 'Erro ao listar os registros.');
+  }
+};
+
+const getAllSelected = async (filter = 'S'): Promise<IJogadoresComTotalCount | Error> => {
+  try {
+    const urlRelativa = `/jogadores?_page=1&_limit=100&ativo_like=${filter}`;
+    const { data, headers } = await Api.get(urlRelativa);
+
+    if (data) {
+      return {
+        data,
+        totalCount: Number(headers['x-total-count'] || 100),
       };
     }
 
@@ -96,4 +137,6 @@ export const JogadoresService = {
   getById,
   updateById,
   deleteById,
+  getAllForSort,
+  getAllSelected,
 };

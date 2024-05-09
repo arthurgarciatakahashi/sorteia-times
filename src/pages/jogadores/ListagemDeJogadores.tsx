@@ -15,6 +15,7 @@ export const ListagemDeJogadores: React.FC = () => {
   const navigate = useNavigate();
 
   const [rows, setRows] = useState<IListagemJogador[]>([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
 
@@ -43,6 +44,7 @@ export const ListagemDeJogadores: React.FC = () => {
 
             setTotalCount(result.totalCount);
             setRows(result.data);
+
           }
         });
     });
@@ -83,6 +85,7 @@ export const ListagemDeJogadores: React.FC = () => {
           <TableHead>
             <TableRow>
               <TableCell width={100}>Ações</TableCell>
+              <TableCell>Ativo</TableCell>
               <TableCell>Nome</TableCell>
               <TableCell>Posição</TableCell>
               <TableCell>Nota</TableCell>
@@ -99,6 +102,7 @@ export const ListagemDeJogadores: React.FC = () => {
                     <Icon>edit</Icon>
                   </IconButton>
                 </TableCell>
+                <TableCell>{row.ativo}</TableCell>
                 <TableCell>{row.nome}</TableCell>
                 <TableCell>{row.posicao}</TableCell>
                 <TableCell>{row.nota}</TableCell>

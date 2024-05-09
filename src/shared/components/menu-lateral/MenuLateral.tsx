@@ -48,7 +48,7 @@ export const MenuLateral: React.FC = ({ children }) => {
           <Box width="100%" height={theme.spacing(20)} display="flex" alignItems="center" justifyContent="center">
             <Avatar
               sx={{ height: theme.spacing(12), width: theme.spacing(12) }}
-              src="https://e7.pngegg.com/pngimages/433/699/png-clipart-delta-computers-rentals-computer-icons-user-icon-entrepreneurship-head-desktop-wallpaper.png"
+              src="https://img.freepik.com/fotos-premium/a-copa-do-campeao-no-fundo-de-um-campo-de-futebol_927877-23.jpg"
             />
           </Box>
 
