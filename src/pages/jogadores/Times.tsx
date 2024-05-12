@@ -159,6 +159,7 @@ export const Times: React.FC = () => {
         textoBotaoPersonalizado='Compartilhar'
         iconeBotaoPersonalizado='picture_as_pdf'
         aoClicarEmPersonalizado={() => toPDF()}
+        mostrarBotaoNovo={false}
         mostrarBotaoVoltar={true}
         mostrarBotaoApagar={false}
         mostrarBotaoSalvar={false}

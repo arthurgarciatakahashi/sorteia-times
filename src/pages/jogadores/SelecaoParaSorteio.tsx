@@ -60,7 +60,8 @@ export const SelecaoParaSorteio: React.FC = () => {
       field: 'nota',
       headerName: 'Nota',
       type: 'number',
-      width: 90,
+      width: 100,
+      align: 'right',
     },
   ];
 
@@ -90,7 +91,7 @@ export const SelecaoParaSorteio: React.FC = () => {
           <DataGrid
             rows={rows}
             columns={columns}
-
+            
             //checkboxSelection
             // onRowSelectionModelChange={(newRowSelectionModel) => {
             //   setRowSelectionModel(newRowSelectionModel);

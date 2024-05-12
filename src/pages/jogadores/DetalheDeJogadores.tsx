@@ -19,7 +19,7 @@ interface IFormData {
 
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
   nota: yup.number().required().equals([1, 2, 3, 4, 5]),
-  posicao: yup.string().required().max(3),
+  posicao: yup.string().required().max(3).equals(['ATA','MEI','DEF','GOL']),
   nome: yup.string().required().min(3),
   ativo: yup.string().required().max(1).equals(['S','N']),
 });
@@ -177,8 +177,8 @@ export const DetalheDejogadores: React.FC = () => {
                 <VTextField
                   fullWidth
                   name='posicao'
-                  label='Posição ATA, MEI ou DEF'
-                  placeholder='ATA, MEI ou DEF'
+                  label='Posição ATA MEI DEF GOL'
+                  placeholder='ATA, DEF, GOL ou MEI'
                   disabled={isLoading}
                 />
               </Grid>
