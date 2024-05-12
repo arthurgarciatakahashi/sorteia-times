@@ -3,45 +3,55 @@ import { Box, Button, Divider, Icon, Paper, Skeleton, Theme, Typography, useMedi
 
 interface IFerramentasDeDetalheProps {
   textoBotaoNovo?: string;
+  textoBotaoPersonalizado?: string;
+  iconeBotaoPersonalizado?: string;
 
   mostrarBotaoNovo?: boolean;
   mostrarBotaoVoltar?: boolean;
   mostrarBotaoApagar?: boolean;
   mostrarBotaoSalvar?: boolean;
   mostrarBotaoSalvarEFechar?: boolean;
+  mostrarBotaoPersonalizado?: boolean;
 
   mostrarBotaoNovoCarregando?: boolean;
   mostrarBotaoVoltarCarregando?: boolean;
   mostrarBotaoApagarCarregando?: boolean;
   mostrarBotaoSalvarCarregando?: boolean;
   mostrarBotaoSalvarEFecharCarregando?: boolean;
+  mostrarBotaoPersonalizadoCarregando?: boolean;
 
   aoClicarEmNovo?: () => void;
   aoClicarEmVoltar?: () => void;
   aoClicarEmApagar?: () => void;
   aoClicarEmSalvar?: () => void;
   aoClicarEmSalvarEFechar?: () => void;
+  aoClicarEmPersonalizado?: () => void;
 }
 export const FerramentasDeDetalhe: React.FC<IFerramentasDeDetalheProps> = ({
   textoBotaoNovo = 'Novo',
+  textoBotaoPersonalizado = 'Ação',
+  iconeBotaoPersonalizado = 'add',
 
   mostrarBotaoNovo = true,
   mostrarBotaoVoltar = true,
   mostrarBotaoApagar = true,
   mostrarBotaoSalvar = true,
   mostrarBotaoSalvarEFechar = false,
+  mostrarBotaoPersonalizado = false,
 
   mostrarBotaoNovoCarregando = false,
   mostrarBotaoVoltarCarregando = false,
   mostrarBotaoApagarCarregando = false,
   mostrarBotaoSalvarCarregando = false,
   mostrarBotaoSalvarEFecharCarregando = false,
+  mostrarBotaoPersonalizadoCarregando = false,
 
   aoClicarEmNovo,
   aoClicarEmVoltar,
   aoClicarEmApagar,
   aoClicarEmSalvar,
   aoClicarEmSalvarEFechar,
+  aoClicarEmPersonalizado,
 }) => {
   const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
   const mdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
@@ -127,6 +137,24 @@ export const FerramentasDeDetalhe: React.FC<IFerramentasDeDetalheProps> = ({
       )}
 
       {(mostrarBotaoNovoCarregando && !smDown) && (
+        <Skeleton width={110} height={60} />
+      )}
+
+      {(mostrarBotaoPersonalizado && !mostrarBotaoPersonalizadoCarregando) && (
+        <Button
+          color='primary'
+          disableElevation
+          variant='outlined'
+          onClick={aoClicarEmPersonalizado}
+          startIcon={<Icon>{iconeBotaoPersonalizado}</Icon>}
+        >
+          <Typography variant='button' whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
+            {textoBotaoPersonalizado}
+          </Typography>
+        </Button>
+      )}
+
+      {(mostrarBotaoPersonalizadoCarregando) && (
         <Skeleton width={110} height={60} />
       )}
 

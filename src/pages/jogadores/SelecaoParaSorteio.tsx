@@ -70,6 +70,7 @@ export const SelecaoParaSorteio: React.FC = () => {
       barraDeFerramentas={
         <FerramentasDaListagem
           textoBotaoNovo='Sortear Times'
+          iconeBotaoNovo='groups3'
           aoClicarEmNovo={() => {
             const jogadores = rowSelectionModel.map((selectedId) =>
               rows.find((item) => item.id === selectedId));

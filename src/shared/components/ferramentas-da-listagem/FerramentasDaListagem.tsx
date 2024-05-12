@@ -9,6 +9,7 @@ interface IFerramentasDaListagemProps {
   aoMudarTextoDeBusca?: (novoTexto: string) => void;
   textoBotaoNovo?: string;
   mostrarBotaoNovo?: boolean;
+  iconeBotaoNovo?: string;
   aoClicarEmNovo?: () => void;
 }
 export const FerramentasDaListagem: React.FC<IFerramentasDaListagemProps> = ({
@@ -17,6 +18,7 @@ export const FerramentasDaListagem: React.FC<IFerramentasDaListagemProps> = ({
   mostrarInputBusca = false,
   aoClicarEmNovo,
   textoBotaoNovo = 'Novo',
+  iconeBotaoNovo = 'add',
   mostrarBotaoNovo = true,
 }) => {
   const theme = useTheme();
@@ -48,7 +50,7 @@ export const FerramentasDaListagem: React.FC<IFerramentasDaListagemProps> = ({
             disableElevation
             variant='contained'
             onClick={aoClicarEmNovo}
-            endIcon={<Icon>add</Icon>}
+            endIcon={<Icon>{iconeBotaoNovo}</Icon>}
           >{textoBotaoNovo}</Button>
         )}
       </Box>

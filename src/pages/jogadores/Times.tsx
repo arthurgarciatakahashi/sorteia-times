@@ -155,9 +155,10 @@ export const Times: React.FC = () => {
     <LayoutBaseDePagina
       titulo='Times'
       barraDeFerramentas={<FerramentasDeDetalhe
-        mostrarBotaoNovo
-        textoBotaoNovo='Compartilhar'
-        aoClicarEmNovo={() => toPDF()}
+        mostrarBotaoPersonalizado={true}
+        textoBotaoPersonalizado='Compartilhar'
+        iconeBotaoPersonalizado='picture_as_pdf'
+        aoClicarEmPersonalizado={() => toPDF()}
         mostrarBotaoVoltar={true}
         mostrarBotaoApagar={false}
         mostrarBotaoSalvar={false}
