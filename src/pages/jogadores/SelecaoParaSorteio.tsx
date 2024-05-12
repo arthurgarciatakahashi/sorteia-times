@@ -37,7 +37,8 @@ export const SelecaoParaSorteio: React.FC = () => {
     setIsLoading(true);
 
     debounce(() => {
-      JogadoresService.getAllForSort()
+      //TODO: colocar a getallfotsort quando for fazer a lista para podermos fazer a selecao
+      JogadoresService.getAllSelected('S')
         .then((result) => {
           setIsLoading(false);
 

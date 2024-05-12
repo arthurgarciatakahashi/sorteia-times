@@ -1,11 +1,12 @@
 import { Box, Card, CardContent, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { LayoutBaseDePagina } from '../../shared/layouts';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IListagemJogador, JogadoresService } from '../../shared/services/api/jogadores/JogadoresService';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDebounce } from '../../shared/hooks';
-import { resourceLimits } from 'worker_threads';
+import arrayShuffle from 'array-shuffle';
+import { usePDF } from 'react-to-pdf';
 
 
 export const Times: React.FC = () => {
@@ -18,7 +19,7 @@ export const Times: React.FC = () => {
 
   const [timeAmarelo, setTimeAmarelo] = useState<IListagemJogador[]>([]);
   const [timeAzul, setTimeAzul] = useState<IListagemJogador[]>([]);
-  const [timeAzulATA, setTimeAzulATA] = useState(0);
+  const [timeAzulATA, setTimeAzulATA] = useState(Number(0));
   const [timeAzulMEI, setTimeAzulMEI] = useState(0);
   const [timeAzulDEF, setTimeAzulDEF] = useState(0);
   const [timeAzulGOL, setTimeAzulGOL] = useState(0);
@@ -26,6 +27,9 @@ export const Times: React.FC = () => {
   const [timeAmareloMEI, setTimeAmareloMEI] = useState(0);
   const [timeAmareloDEF, setTimeAmareloDEF] = useState(0);
   const [timeAmareloGOL, setTimeAmareloGOL] = useState(0);
+
+  const { toPDF, targetRef } = usePDF({filename: 'times.pdf'});
+
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,50 +47,91 @@ export const Times: React.FC = () => {
             setTotalCount(result.totalCount);
             setRows(result.data);
 
-            result.data.sort((a, b) => 
-              a.nota - b.nota
-            ).forEach(jogador => {
+            const listGOLs = result.data.filter(row => row.posicao === 'GOL');
+            const listToTalSemGOL = result.data.filter(row => row.posicao !== 'GOL');
+            // ja estao criados time amarelo e time azul inicializados vazios
+            console.log('sem goleiros ' + listToTalSemGOL);
+            console.log('goleiros ' + listGOLs);
+            console.log('azul Ant: ' + timeAzul.length + ' amarelo Ant: ' + timeAmarelo.length);
+            setIsLoading(true);
 
-              switch (jogador.posicao) { case 'ATA':
-                if (timeAzulATA > timeAmareloATA) {
-                  timeAmarelo.push(jogador);
-                  setTimeAmareloATA(timeAmareloATA + 1);
-                } else {
-                  timeAzul.push(jogador);
-                  setTimeAzulATA(timeAzulATA + 1);
-                }
-                break;
-              case 'MEI':
-                if (timeAzulMEI < timeAmareloMEI) {
-                  timeAzul.push(jogador);
-                  setTimeAzulMEI(timeAzulMEI + 1);
-                } else {
-                  timeAmarelo.push(jogador);
-                  setTimeAmareloMEI(timeAmareloMEI + 1);
-                }
-                break;
-              case 'DEF':
-                if (timeAzulDEF > timeAmareloDEF) {
-                  timeAmarelo.push(jogador);
-                  setTimeAmareloDEF(timeAmareloDEF + 1);
-                } else {
-                  timeAzul.push(jogador);
-                  setTimeAzulDEF(timeAzulDEF + 1);
-                }
-                break;
-              case 'GOL':
-                if (timeAzulGOL < timeAmareloGOL) {
-                  timeAmarelo.push(jogador);
-                  setTimeAmareloGOL(timeAmareloGOL + 1);
-                } else {
-                  timeAzul.push(jogador);
-                  setTimeAzulGOL(timeAzulGOL + 1);
-                }
-                break;
+            arrayShuffle(listToTalSemGOL).map(jogadorLinha => {
 
+              if (timeAzul.length > timeAmarelo.length) {
+                timeAmarelo.push(jogadorLinha);
+              } else {
+                timeAzul.push(jogadorLinha);
               }
-
             });
+
+            console.log('azul: ' + timeAzul.length + ' amarelo: ' + timeAmarelo.length);
+            console.log(timeAzul);
+            console.log('comencando com goleiros');
+            if (listGOLs.length >= 1) {
+              listGOLs.map(goleiro => {
+
+                if (timeAzul.length > timeAmarelo.length) {
+                  timeAmarelo.push(goleiro);
+                } else {
+                  timeAzul.push(goleiro);
+                }
+              });
+            }
+            timeAzul.sort((a, b) => a.posicao.localeCompare(b.posicao));
+            timeAmarelo.sort((a, b) => a.posicao.localeCompare(b.posicao));
+
+            setIsLoading(false);
+
+            // console.log('azul' + timeAzul + 'contagem ' + timeAzul.length);
+
+            // if (listGOLs && listGOLs.length > 1) {
+
+            // }
+            // result.data.sort((a, b) => 
+            //   a.nota - b.nota
+            // ).forEach(jogador => {
+
+            //   switch (jogador.posicao) { case 'ATA':
+            //     if (timeAzulATA > timeAmareloATA) {
+            //       timeAmarelo.push(jogador);
+            //       setTimeAmareloATA(timeAmareloATA + 1);
+            //     } else {
+            //       timeAzul.push(jogador);
+            //       setTimeAzulATA(timeAzulATA + 1);
+            //     }
+            //     break;
+            //   case 'MEI':
+            //     if (timeAzulMEI < timeAmareloMEI) {
+            //       timeAzul.push(jogador);
+            //       setTimeAzulMEI(timeAzulMEI + 1);
+            //     } else {
+            //       timeAmarelo.push(jogador);
+            //       setTimeAmareloMEI(timeAmareloMEI + 1);
+            //     }
+            //     break;
+            //   case 'DEF':
+            //     if (timeAzulDEF > timeAmareloDEF) {
+            //       timeAmarelo.push(jogador);
+            //       setTimeAmareloDEF(timeAmareloDEF + 1);
+            //     } else {
+            //       timeAzul.push(jogador);
+            //       setTimeAzulDEF(timeAzulDEF + 1);
+            //     }
+            //     break;
+            //   case 'GOL':
+            //     if (timeAzulGOL < timeAmareloGOL) {
+            //       timeAmarelo.push(jogador);
+            //       setTimeAmareloGOL(timeAmareloGOL + 1);
+            //     } else {
+            //       timeAzul.push(jogador);
+            //       setTimeAzulGOL(timeAzulGOL + 1);
+            //     }
+            //     break;
+
+            //   }
+
+            // });
+
           }
         });
     });
@@ -100,15 +145,15 @@ export const Times: React.FC = () => {
       barraDeFerramentas={<FerramentasDeDetalhe
         mostrarBotaoNovo
         textoBotaoNovo='Compartilhar'
+        aoClicarEmNovo={() => toPDF()}
         mostrarBotaoVoltar={true}
         mostrarBotaoApagar={false}
         mostrarBotaoSalvar={false}
         aoClicarEmVoltar={() => navigate('/sorteio')}
-
-
       />}
     >
-      <Box width='100%' display='flex'>
+
+      <Box width='100%' display='flex' ref={targetRef}>
         <Grid container margin={2}>
           <Grid item container spacing={2}>
             <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
@@ -134,8 +179,6 @@ export const Times: React.FC = () => {
                       </TableBody>
                     </Table>
                   </TableContainer>
-
-
                 </CardContent>
               </Card>
 
@@ -171,6 +214,7 @@ export const Times: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
-    </LayoutBaseDePagina>
+
+    </LayoutBaseDePagina >
   );
 };

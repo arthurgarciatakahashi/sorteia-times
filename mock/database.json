@@ -120,10 +120,10 @@
   "jogadores": [
     {
       "id": 1,
-      "ativo": "S",
       "nome": "Arthur",
       "posicao": "MEI",
-      "nota": 4
+      "nota": 4,
+      "ativo": "S"
     },
     {
       "id": 2,
