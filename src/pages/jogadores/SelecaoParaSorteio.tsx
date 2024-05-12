@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { Box, Container, LinearProgress, Paper } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 
@@ -35,7 +35,7 @@ export const SelecaoParaSorteio: React.FC = () => {
       //TODO: colocar a getallfotsort quando for fazer a lista para podermos fazer a selecao
       //colocar o getAllSelected se nao for usar o check por enquanto
       JogadoresService.getAllSelected('S')
-      //JogadoresService.getAllForSort()
+        //JogadoresService.getAllForSort()
         .then((result) => {
           setIsLoading(false);
 
@@ -79,23 +79,26 @@ export const SelecaoParaSorteio: React.FC = () => {
         />
       }
     >
-      {/* <Container component={Paper} variant="outlined" sx={{ m: 1, width: 'auto' }}> */}
-      <div style={{ height: 400, width: '100%', margin: 8 }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          
-          //checkboxSelection
-          // onRowSelectionModelChange={(newRowSelectionModel) => {
-          //   setRowSelectionModel(newRowSelectionModel);
-          // }}
-          // rowSelectionModel={rowSelectionModel}
-          {...rows}
-        />
-      </div>
-      {/* </Container> */}
-      <Box flex={1} display="flex" justifyContent="end">
-      </Box>
+      {isLoading && (
+        <Container component={Paper} variant="outlined" sx={{ m: 1, width: 'auto' }}>
+          <LinearProgress variant='indeterminate' />
+        </Container>
+      )}
+      {!isLoading && (
+        <div style={{ height: 400, width: '100%', margin: 8 }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+
+            //checkboxSelection
+            // onRowSelectionModelChange={(newRowSelectionModel) => {
+            //   setRowSelectionModel(newRowSelectionModel);
+            // }}
+            // rowSelectionModel={rowSelectionModel}
+            {...rows}
+          />
+        </div>
+      )}
     </LayoutBaseDePagina >
   );
 };

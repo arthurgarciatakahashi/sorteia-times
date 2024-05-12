@@ -117,14 +117,14 @@ export const ListagemDeJogadores: React.FC = () => {
           <TableFooter>
             {isLoading && (
               <TableRow>
-                <TableCell colSpan={3}>
+                <TableCell colSpan={5}>
                   <LinearProgress variant='indeterminate' />
                 </TableCell>
               </TableRow>
             )}
             {(totalCount > 0 && totalCount > Environment.LIMITE_DE_LINHAS) && (
               <TableRow>
-                <TableCell colSpan={3}>
+                <TableCell colSpan={5}>
                   <Pagination
                     page={pagina}
                     count={Math.ceil(totalCount / Environment.LIMITE_DE_LINHAS)}

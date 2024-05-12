@@ -177,7 +177,8 @@ export const DetalheDejogadores: React.FC = () => {
                 <VTextField
                   fullWidth
                   name='posicao'
-                  label='Posição'
+                  label='Posição ATA, MEI ou DEF'
+                  placeholder='ATA, MEI ou DEF'
                   disabled={isLoading}
                 />
               </Grid>
@@ -189,6 +190,7 @@ export const DetalheDejogadores: React.FC = () => {
                   fullWidth
                   name='nota'
                   label='Nota'
+                  placeholder='de 1 a 5'
                   disabled={isLoading}
                 />
               </Grid>

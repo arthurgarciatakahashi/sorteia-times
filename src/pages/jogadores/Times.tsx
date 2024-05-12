@@ -7,8 +7,9 @@ import {
   Card,
   CardContent,
   Grid,
+  LinearProgress,
   Paper, Table, TableBody, TableCell,
-  TableContainer, TableHead, TableRow
+  TableContainer, TableFooter, TableHead, TableRow
 } from '@mui/material';
 
 import { FerramentasDeDetalhe } from '../../shared/components';
@@ -188,6 +189,15 @@ export const Times: React.FC = () => {
                           </TableRow>
                         ))}
                       </TableBody>
+                      <TableFooter>
+                        {isLoading && (
+                          <TableRow>
+                            <TableCell colSpan={2}>
+                              <LinearProgress variant='indeterminate' />
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableFooter>
                     </Table>
                   </TableContainer>
                 </CardContent>
@@ -216,6 +226,15 @@ export const Times: React.FC = () => {
                           </TableRow>
                         ))}
                       </TableBody>
+                      <TableFooter>
+                        {isLoading && (
+                          <TableRow>
+                            <TableCell colSpan={2}>
+                              <LinearProgress variant='indeterminate' />
+                            </TableCell>
+                          </TableRow>
+                        )}
+                      </TableFooter>
                     </Table>
                   </TableContainer>
 
