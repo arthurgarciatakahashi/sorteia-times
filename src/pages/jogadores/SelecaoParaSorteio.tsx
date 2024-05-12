@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Box, Button, Container, Icon, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import * as React from 'react';
+import { Box } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 
 import { FerramentasDaListagem } from '../../shared/components';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { useDebounce } from '../../shared/hooks';
-import { IDetalheJogador, IListagemJogador, JogadoresService } from '../../shared/services/api/jogadores/JogadoresService';
-import { DataGrid, GridColDef, GridRowSelectionModel, selectedGridRowsCountSelector } from '@mui/x-data-grid';
-import * as React from 'react';
-
+import { IListagemJogador, JogadoresService } from '../../shared/services/api/jogadores/JogadoresService';
 
 export const SelecaoParaSorteio: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,11 +17,7 @@ export const SelecaoParaSorteio: React.FC = () => {
   const [rows, setRows] = useState<IListagemJogador[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
-  //const [selection, setSelection] = useState<IListagemJogador[]>([]);
   const [rowSelectionModel, setRowSelectionModel] = useState<GridRowSelectionModel>([]);
-  const [data, SetData] = useState<IListagemJogador[]>([]);
-
-
 
   const busca = useMemo(() => {
     return searchParams.get('busca') || '';
@@ -38,7 +33,9 @@ export const SelecaoParaSorteio: React.FC = () => {
 
     debounce(() => {
       //TODO: colocar a getallfotsort quando for fazer a lista para podermos fazer a selecao
+      //colocar o getAllSelected se nao for usar o check por enquanto
       JogadoresService.getAllSelected('S')
+      //JogadoresService.getAllForSort()
         .then((result) => {
           setIsLoading(false);
 
@@ -88,7 +85,7 @@ export const SelecaoParaSorteio: React.FC = () => {
           rows={rows}
           columns={columns}
           
-          // checkboxSelection
+          //checkboxSelection
           // onRowSelectionModelChange={(newRowSelectionModel) => {
           //   setRowSelectionModel(newRowSelectionModel);
           // }}

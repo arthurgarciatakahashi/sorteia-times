@@ -2,40 +2,39 @@ import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import { FerramentasDaListagem } from '../../shared/components';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { useEffect, useState } from 'react';
-import { CidadesService } from '../../shared/services/api/cidades/CidadesService';
-import { PessoasService } from '../../shared/services/api/pessoas/PessoasService';
+import { JogadoresService } from '../../shared/services/api/jogadores/JogadoresService';
 
 
 export const Dashboard = () => {
-  const [isLoadingCidades, setIsLoadingCidades] = useState(true);
-  const [totalCountCidades, setTotalCountCidades] = useState(0);
-  const [isLoadingPessoas, setIsLoadingPessoas] = useState(true);
-  const [totalCountPessoas, setTotalCountPessoas] = useState(0);
+  const [isLoadingJogadores, setIsLoadingJogadores] = useState(true);
+  const [totalCountJogadores, setTotalCountJogadores] = useState(0);
+  const [isLoadingJogadoresAtivos, setIsLoadingJogadoresAtivos] = useState(true);
+  const [totalCountJogadoresAtivos, setTotalCountJogadoresAtivos] = useState(0);
 
   useEffect(() => {
-    setIsLoadingCidades(true);
-    setIsLoadingPessoas(true);
+    setIsLoadingJogadores(true);
+    setIsLoadingJogadoresAtivos(true);
 
-    CidadesService.getAll(1)
+    JogadoresService.getAll(1)
       .then((result) => {
-        setIsLoadingCidades(false);
+        setIsLoadingJogadores(false);
 
         if (result instanceof Error) {
           alert(result.message);
         } else {
 
-          setTotalCountCidades(result.totalCount);
+          setTotalCountJogadores(result.totalCount);
         }
       });
-    PessoasService.getAll(1)
+    JogadoresService.getAllSelected()
       .then((result) => {
-        setIsLoadingPessoas(false);
+        setIsLoadingJogadoresAtivos(false);
 
         if (result instanceof Error) {
           alert(result.message);
         } else {
 
-          setTotalCountPessoas(result.totalCount);
+          setTotalCountJogadoresAtivos(result.totalCount);
         }
       });
   }, []);
@@ -52,14 +51,14 @@ export const Dashboard = () => {
               <Card>
                 <CardContent>
                   <Typography variant='h5' align='center'>
-                    Total de Pessoas
+                    Total de Jogadores
                   </Typography>
                   <Box padding={6} display='flex' justifyContent='center' alignItems='center'>
-                    {!isLoadingPessoas && (<Typography variant='h1' align='center'>
-                      {totalCountPessoas}
+                    {!isLoadingJogadores && (<Typography variant='h1' align='center'>
+                      {totalCountJogadores}
                     </Typography>
                     )}
-                    {isLoadingPessoas && (
+                    {isLoadingJogadores && (
                       <Typography variant='h6'>
                         Carregando...
                       </Typography>
@@ -74,15 +73,15 @@ export const Dashboard = () => {
               <Card>
                 <CardContent>
                   <Typography variant='h5' align='center'>
-                    Total de Cidades
+                    Jogadores Ativos
                   </Typography>
 
                   <Box padding={6} display='flex' justifyContent='center' alignItems='center'>
-                    {!isLoadingCidades && (<Typography variant='h1' align='center'>
-                      {totalCountCidades}
+                    {!isLoadingJogadoresAtivos && (<Typography variant='h1' align='center'>
+                      {totalCountJogadoresAtivos}
                     </Typography>
                     )}
-                    {isLoadingCidades && (
+                    {isLoadingJogadoresAtivos && (
                       <Typography variant='h6'>
                         Carregando...
                       </Typography>

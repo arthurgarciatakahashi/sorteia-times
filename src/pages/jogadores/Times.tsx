@@ -1,34 +1,40 @@
-import { Box, Card, CardContent, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { FerramentasDeDetalhe } from '../../shared/components';
-import { LayoutBaseDePagina } from '../../shared/layouts';
 import { useEffect, useState } from 'react';
-import { IListagemJogador, JogadoresService } from '../../shared/services/api/jogadores/JogadoresService';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useDebounce } from '../../shared/hooks';
+import { useLocation, useNavigate } from 'react-router-dom';
 import arrayShuffle from 'array-shuffle';
 import { usePDF } from 'react-to-pdf';
+import {
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  Paper, Table, TableBody, TableCell,
+  TableContainer, TableHead, TableRow
+} from '@mui/material';
 
+import { FerramentasDeDetalhe } from '../../shared/components';
+import { LayoutBaseDePagina } from '../../shared/layouts';
+import { IListagemJogador, JogadoresService } from '../../shared/services/api/jogadores/JogadoresService';
+import { useDebounce } from '../../shared/hooks';
 
 export const Times: React.FC = () => {
   const [rows, setRows] = useState<IListagemJogador[]>([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
-  const [searchParams, setSearchParams] = useSearchParams();
   const { debounce } = useDebounce();
   const navigate = useNavigate();
+  const { toPDF, targetRef } = usePDF({ filename: 'times.pdf' });
 
   const [timeAmarelo, setTimeAmarelo] = useState<IListagemJogador[]>([]);
   const [timeAzul, setTimeAzul] = useState<IListagemJogador[]>([]);
-  const [timeAzulATA, setTimeAzulATA] = useState(Number(0));
-  const [timeAzulMEI, setTimeAzulMEI] = useState(0);
-  const [timeAzulDEF, setTimeAzulDEF] = useState(0);
-  const [timeAzulGOL, setTimeAzulGOL] = useState(0);
-  const [timeAmareloATA, setTimeAmareloATA] = useState(0);
-  const [timeAmareloMEI, setTimeAmareloMEI] = useState(0);
-  const [timeAmareloDEF, setTimeAmareloDEF] = useState(0);
-  const [timeAmareloGOL, setTimeAmareloGOL] = useState(0);
-
-  const { toPDF, targetRef } = usePDF({filename: 'times.pdf'});
+  // const [timeAzulATA, setTimeAzulATA] = useState(0);
+  // const [timeAzulMEI, setTimeAzulMEI] = useState(0);
+  // const [timeAzulDEF, setTimeAzulDEF] = useState(0);
+  // const [timeAzulGOL, setTimeAzulGOL] = useState(0);
+  // const [timeAmareloATA, setTimeAmareloATA] = useState(0);
+  // const [timeAmareloMEI, setTimeAmareloMEI] = useState(0);
+  // const [timeAmareloDEF, setTimeAmareloDEF] = useState(0);
+  // const [timeAmareloGOL, setTimeAmareloGOL] = useState(0);
 
 
   useEffect(() => {
@@ -43,9 +49,14 @@ export const Times: React.FC = () => {
             alert(result.message);
           } else {
             console.log(result);
+            //const {state} = useLocation();
 
             setTotalCount(result.totalCount);
+            //trocar aqui se nao funcionar o start
+            //setRows(state as IListagemJogador[]);
             setRows(result.data);
+            console.log('rows');
+            console.log(rows);
 
             const listGOLs = result.data.filter(row => row.posicao === 'GOL');
             const listToTalSemGOL = result.data.filter(row => row.posicao !== 'GOL');
@@ -68,7 +79,7 @@ export const Times: React.FC = () => {
             console.log(timeAzul);
             console.log('comencando com goleiros');
             if (listGOLs.length >= 1) {
-              listGOLs.map(goleiro => {
+              listGOLs.sort((a, b) => a.nota - b.nota).map(goleiro => {
 
                 if (timeAzul.length > timeAmarelo.length) {
                   timeAmarelo.push(goleiro);

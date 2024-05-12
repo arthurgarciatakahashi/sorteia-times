@@ -16,6 +16,6 @@ export const Environment = {
    * Url base de consultado dos dados dessa aplicação
    * URL_BASE: 'https://json-server-vercel-xi-lake.vercel.app/api/',
    */
-  URL_BASE: 'http://localhost:3333'
-  // URL_BASE: 'https://json-server-vercel-xi-lake.vercel.app/api/'
+  //URL_BASE: 'http://localhost:3333'
+  URL_BASE: 'https://json-server-vercel-xi-lake.vercel.app/api/'
 };

@@ -156,7 +156,7 @@
     {
       "id": 6,
       "nome": "Daniel Tabajara",
-      "posicao": "DEF",
+      "posicao": "ATA",
       "nota": 3,
       "ativo": "S"
     },
@@ -248,7 +248,8 @@
       "id": 19,
       "nome": "Renan",
       "posicao": "GOL",
-      "nota": 5
+      "nota": 5,
+      "ativo": "S"
     },
     {
       "id": 20,

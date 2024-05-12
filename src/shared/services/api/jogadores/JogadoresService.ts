@@ -18,12 +18,12 @@ export interface IDetalheJogador {
   ativo: string;
 }
 
-type IJogadoresComTotalCount = {
+type TJogadoresComTotalCount = {
   data: IListagemJogador[];
   totalCount: number;
 }
 
-const getAll = async (page = 1, filter = ''): Promise<IJogadoresComTotalCount | Error> => {
+const getAll = async (page = 1, filter = ''): Promise<TJogadoresComTotalCount | Error> => {
   try {
     const urlRelativa = `/jogadores?_page=${page}&_limit=${Environment.LIMITE_DE_LINHAS}&nome_like=${filter}`;
 
@@ -43,7 +43,7 @@ const getAll = async (page = 1, filter = ''): Promise<IJogadoresComTotalCount | 
   }
 };
 
-const getAllForSort = async (): Promise<IJogadoresComTotalCount | Error> => {
+const getAllForSort = async (): Promise<TJogadoresComTotalCount | Error> => {
   try {
     const urlRelativa = '/jogadores?_limit=100';
 
@@ -63,7 +63,7 @@ const getAllForSort = async (): Promise<IJogadoresComTotalCount | Error> => {
   }
 };
 
-const getAllSelected = async (filter = 'S'): Promise<IJogadoresComTotalCount | Error> => {
+const getAllSelected = async (filter = 'S'): Promise<TJogadoresComTotalCount | Error> => {
   try {
     const urlRelativa = `/jogadores?_page=1&_limit=100&ativo_like=${filter}`;
     const { data, headers } = await Api.get(urlRelativa);
