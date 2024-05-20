@@ -17,8 +17,8 @@ export const AppRoutes = () => {
     setDrawerOptions([
       {
         icon: 'home',
-        path: '/pagina-inicial',
-        label: 'Página inicial',
+        path: '/home',
+        label: 'home',
       },
       {
         icon: 'sports_soccer',
@@ -35,7 +35,7 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/pagina-inicial" element={<Dashboard />} />
+      <Route path="/home" element={<Dashboard />} />
 
       <Route path="/jogadores" element={<ListagemDeJogadores />} />
       <Route path="/jogadores/detalhe/:id" element={<DetalheDejogadores />} />
@@ -43,7 +43,7 @@ export const AppRoutes = () => {
       <Route path="/sorteio" element={<SelecaoParaSorteio />} />
       <Route path="/times" element={<Times />} />
 
-      <Route path="*" element={<Navigate to="/pagina-inicial" />} />
+      <Route path="*" element={<Navigate to="/home" />} />
     </Routes>
   );
 };
