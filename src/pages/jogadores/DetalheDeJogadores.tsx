@@ -14,14 +14,14 @@ interface IFormData {
   nome: string;
   posicao: string;
   nota: number;
-  ativo: string;
+  ativo: boolean;
 }
 
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
   nota: yup.number().required().equals([1, 2, 3, 4, 5]),
   posicao: yup.string().required().max(3).equals(['ATA','MEI','DEF','GOL']),
   nome: yup.string().required().min(3),
-  ativo: yup.string().required().max(1).equals(['S','N']),
+  ativo: yup.boolean().default(true),
 });
 
 export const DetalheDejogadores: React.FC = () => {
@@ -201,7 +201,7 @@ export const DetalheDejogadores: React.FC = () => {
                 <VTextField
                   fullWidth
                   name='ativo'
-                  label='Ativo S ou N'
+                  label='Ativo true ou false'
                   disabled={isLoading}
                 />
               </Grid>

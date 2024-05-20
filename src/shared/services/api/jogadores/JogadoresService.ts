@@ -7,7 +7,7 @@ export interface IListagemJogador {
   nome: string;
   posicao: string;
   nota: number;
-  ativo: string;
+  ativo: boolean;
 }
 
 export interface IDetalheJogador {
@@ -15,7 +15,7 @@ export interface IDetalheJogador {
   nome: string;
   posicao: string;
   nota: number;
-  ativo: string;
+  ativo: boolean;
 }
 
 type TJogadoresComTotalCount = {
