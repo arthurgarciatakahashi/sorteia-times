@@ -63,7 +63,7 @@ const getAllForSort = async (): Promise<TJogadoresComTotalCount | Error> => {
   }
 };
 
-const getAllSelected = async (filter = 'S'): Promise<TJogadoresComTotalCount | Error> => {
+const getAllSelected = async (filter = 'true'): Promise<TJogadoresComTotalCount | Error> => {
   try {
     const urlRelativa = `/jogadores?_page=1&_limit=100&ativo_like=${filter}`;
     const { data, headers } = await Api.get(urlRelativa);

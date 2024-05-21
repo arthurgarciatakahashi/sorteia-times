@@ -34,7 +34,7 @@ export const SelecaoParaSorteio: React.FC = () => {
     debounce(() => {
       //TODO: colocar a getallfotsort quando for fazer a lista para podermos fazer a selecao
       //colocar o getAllSelected se nao for usar o check por enquanto
-      JogadoresService.getAllSelected('S')
+      JogadoresService.getAllSelected('true')
         //JogadoresService.getAllForSort()
         .then((result) => {
           setIsLoading(false);
@@ -42,6 +42,7 @@ export const SelecaoParaSorteio: React.FC = () => {
           if (result instanceof Error) {
             alert(result.message);
           } else {
+            console.log('disponiveis para serem selecionados');
             console.log(result);
 
             setTotalCount(result.totalCount);
@@ -92,11 +93,11 @@ export const SelecaoParaSorteio: React.FC = () => {
             rows={rows}
             columns={columns}
             
-            //checkboxSelection
-            // onRowSelectionModelChange={(newRowSelectionModel) => {
-            //   setRowSelectionModel(newRowSelectionModel);
-            // }}
-            // rowSelectionModel={rowSelectionModel}
+            checkboxSelection
+            onRowSelectionModelChange={(newRowSelectionModel) => {
+              setRowSelectionModel(newRowSelectionModel);
+            }}
+            rowSelectionModel={rowSelectionModel}
             {...rows}
           />
         </div>

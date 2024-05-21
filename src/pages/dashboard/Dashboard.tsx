@@ -22,7 +22,8 @@ export const Dashboard = () => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
-
+          console.log('retorno do get all');
+          console.log(result);
           setTotalCountJogadores(result.totalCount);
         }
       });
@@ -33,7 +34,8 @@ export const Dashboard = () => {
         if (result instanceof Error) {
           alert(result.message);
         } else {
-
+          console.log('retorno do select all');
+          console.log(result);
           setTotalCountJogadoresAtivos(result.totalCount);
         }
       });

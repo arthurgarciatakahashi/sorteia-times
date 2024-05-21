@@ -40,6 +40,7 @@ export const ListagemDeJogadores: React.FC = () => {
           if (result instanceof Error) {
             alert(result.message);
           } else {
+            console.log('listagem de jogadores');
             console.log(result);
 
             setTotalCount(result.totalCount);
@@ -51,6 +52,8 @@ export const ListagemDeJogadores: React.FC = () => {
   }, [busca, pagina]);
 
   const handleDelete = (id: number) => {
+    alert('desculpe, funcão de APAGAR desabilitada pelo administrador.');
+    return;
     if (confirm('Realmente deseja excluir?')) {
       JogadoresService.deleteById(id)
         .then(result => {
