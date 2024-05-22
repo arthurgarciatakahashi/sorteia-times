@@ -18,6 +18,6 @@ export const Environment = {
    */
   //URL_BASE: 'http://localhost:3333'
   //URL_BASE: 'https://json-server-vercel-xi-lake.vercel.app/api/'
-  //URL_BASE: 'https://bff-sorteia-times.onrender.com'
-  URL_BASE: 'http://0.0.0.0:8000'
+  URL_BASE: 'https://bff-sorteia-times.onrender.com'
+  //URL_BASE: 'http://0.0.0.0:8000'
 };
