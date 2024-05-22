@@ -8,6 +8,7 @@ import { JogadoresService } from '../../shared/services/api/jogadores/JogadoresS
 import { VTextField, VForm, useVForm, IVFormErrors } from '../../shared/forms';
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { LayoutBaseDePagina } from '../../shared/layouts';
+import { VSwitchField } from '../../shared/forms/VSwitchField';
 
 
 interface IFormData {
@@ -113,6 +114,8 @@ export const DetalheDejogadores: React.FC = () => {
   };
 
   const handleDelete = (id: number) => {
+    alert('desculpe, funcionalidade desabilitada no momento.');
+    return;
     if (confirm('Realmente deseja apagar?')) {
       JogadoresService.deleteById(id)
         .then(result => {
@@ -198,10 +201,10 @@ export const DetalheDejogadores: React.FC = () => {
 
             <Grid container item direction="row" spacing={2}>
               <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-                <VTextField
-                  fullWidth
-                  name='ativo'
-                  label='Ativo true ou false'
+
+                <VSwitchField
+                  name="ativo"
+                  label="Ativo"
                   disabled={isLoading}
                 />
               </Grid>

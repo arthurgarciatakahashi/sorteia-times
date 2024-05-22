@@ -28,7 +28,7 @@ const getAll = async (page = 1, filter = ''): Promise<TJogadoresComTotalCount | 
     const urlRelativa = `/jogadores?_page=${page}&_limit=${Environment.LIMITE_DE_LINHAS}&nome_like=${filter}`;
 
     const { data, headers } = await Api.get(urlRelativa);
-
+    console.log(headers['x-total-count']);
     if (data) {
       return {
         data,

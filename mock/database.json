@@ -123,186 +123,186 @@
       "nome": "Arthur",
       "posicao": "MEI",
       "nota": 4,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 2,
       "nome": "Sandro Emílio",
       "posicao": "MEI",
       "nota": 5,
-      "ativo": "N"
+      "ativo": false
     },
     {
       "id": 3,
       "nome": "Ebradi",
       "posicao": "ATA",
       "nota": 1,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 4,
       "nome": "Eiji",
       "posicao": "DEF",
       "nota": 3,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 5,
       "nome": "Gerson",
       "posicao": "DEF",
       "nota": 2,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 6,
       "nome": "Daniel Tabajara",
       "posicao": "ATA",
       "nota": 3,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 7,
       "nome": "Gio",
       "posicao": "DEF",
       "nota": 4,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 8,
       "nome": "Romario",
       "posicao": "DEF",
       "nota": 4,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 9,
       "nome": "Kiko",
       "posicao": "ATA",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 10,
       "nome": "Fabio Porras",
       "posicao": "ATA",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 11,
       "nome": "Felipe Ramos",
       "posicao": "ATA",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 12,
       "nome": "Gio",
       "posicao": "DEF",
       "nota": 4,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 13,
       "nome": "Kleber",
       "posicao": "DEF",
       "nota": 3,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 14,
       "nome": "Gilmar",
       "posicao": "DEF",
       "nota": 3,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 15,
       "nome": "Victor Hugo",
       "posicao": "MEI",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 16,
       "nome": "Diego Parça",
       "posicao": "ATA",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 17,
       "nome": "Lucas",
       "posicao": "ATA",
       "nota": 2,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 18,
       "nome": "Mitsuo",
       "posicao": "MEI",
       "nota": 2,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 19,
       "nome": "Renan",
       "posicao": "GOL",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 20,
       "nome": "Tomio",
       "posicao": "DEF",
       "nota": 3,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 21,
       "nome": "Philipe",
       "posicao": "MEI",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 22,
       "nome": "Fredy",
       "posicao": "DEF",
       "nota": 1,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 23,
       "nome": "Emmerson",
       "posicao": "DEF",
       "nota": 3,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 24,
       "nome": "César",
       "posicao": "GOL",
       "nota": 1,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 25,
       "nome": "Pedro",
       "posicao": "MEI",
       "nota": 2,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 26,
       "nome": "Matheus",
       "posicao": "GOL",
       "nota": 5,
-      "ativo": "S"
+      "ativo": true
     },
     {
       "id": 27,
-      "ativo": "N",
+      "ativo": false,
       "nome": "Apagar",
       "posicao": "ATA",
       "nota": 1
@@ -312,7 +312,14 @@
       "nome": "Ricardo",
       "posicao": "DEF",
       "nota": 4,
-      "ativo": "S"
+      "ativo": true
+    },
+    {
+      "ativo": true,
+      "nome": "teste",
+      "posicao": "ATA",
+      "nota": 4,
+      "id": 29
     }
   ]
 }

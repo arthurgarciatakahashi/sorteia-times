@@ -8,6 +8,7 @@ import { FerramentasDaListagem } from '../../shared/components';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { useDebounce } from '../../shared/hooks';
 import { IListagemJogador, JogadoresService } from '../../shared/services/api/jogadores/JogadoresService';
+import VDataGrid from '../../shared/components/datagrid/VDatagrid';
 
 export const SelecaoParaSorteio: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -32,10 +33,7 @@ export const SelecaoParaSorteio: React.FC = () => {
     setIsLoading(true);
 
     debounce(() => {
-      //TODO: colocar a getallfotsort quando for fazer a lista para podermos fazer a selecao
-      //colocar o getAllSelected se nao for usar o check por enquanto
       JogadoresService.getAllSelected('true')
-        //JogadoresService.getAllForSort()
         .then((result) => {
           setIsLoading(false);
 
@@ -88,19 +86,20 @@ export const SelecaoParaSorteio: React.FC = () => {
         </Container>
       )}
       {!isLoading && (
-        <div style={{ height: 400, width: '100%', margin: 8 }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            
-            checkboxSelection
-            onRowSelectionModelChange={(newRowSelectionModel) => {
-              setRowSelectionModel(newRowSelectionModel);
-            }}
-            rowSelectionModel={rowSelectionModel}
-            {...rows}
-          />
-        </div>
+        // <div style={{ height: 400, width: '100%', margin: 8 }}>
+        <VDataGrid
+          rows={rows}
+          columns={columns}
+          pagination
+          pageSizeOptions={[5, 25, { value: 100, label: 'todos' }]}
+
+          checkboxSelection
+          onRowSelectionModelChange={(newRowSelectionModel) => {
+            setRowSelectionModel(newRowSelectionModel);
+          }}
+          rowSelectionModel={rowSelectionModel}
+          {...rows}
+        />
       )}
     </LayoutBaseDePagina >
   );

@@ -105,7 +105,7 @@ export const ListagemDeJogadores: React.FC = () => {
                     <Icon>edit</Icon>
                   </IconButton>
                 </TableCell>
-                <TableCell>{row.ativo}</TableCell>
+                <TableCell>{row.ativo? 'S' : 'N'}</TableCell>
                 <TableCell>{row.nome}</TableCell>
                 <TableCell>{row.posicao}</TableCell>
                 <TableCell>{row.nota}</TableCell>
