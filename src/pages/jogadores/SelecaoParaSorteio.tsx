@@ -86,7 +86,6 @@ export const SelecaoParaSorteio: React.FC = () => {
         </Container>
       )}
       {!isLoading && (
-        // <div style={{ height: 400, width: '100%', margin: 8 }}>
         <VDataGrid
           rows={rows}
           columns={columns}

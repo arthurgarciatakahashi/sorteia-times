@@ -139,7 +139,7 @@ export const DetalheDejogadores: React.FC = () => {
           mostrarBotaoSalvarEFechar
           mostrarBotaoNovo={id !== 'novo'}
           mostrarBotaoApagar={id !== 'novo'}
-          mostrarBotaoSalvar={id !== 'novo'}
+          mostrarBotaoSalvar
 
           aoClicarEmSalvar={save}
           aoClicarEmSalvarEFechar={saveAndClose}
