@@ -114,7 +114,6 @@ export const DetalheDejogadores: React.FC = () => {
   };
 
   const handleDelete = (id: number) => {
-    alert('desculpe, funcionalidade desabilitada no momento.');
     return;
     if (confirm('Realmente deseja apagar?')) {
       JogadoresService.deleteById(id)
