@@ -40,13 +40,15 @@ export const Times: React.FC = () => {
 
     if (rows.length > 0) {
       const listGOLs = rows.filter((row) => row.posicao === 'GOL');
-      const listToTalSemGOL = rows.filter((row) => row.posicao !== 'GOL');
+      // const listToTalSemGOL = rows.filter((row) => row.posicao !== 'GOL');
+      const listCafesComLeite = rows.filter((row) => row.nota === 0);
+      const listFinalSemCafeESemGol = rows.filter((row) => row.posicao !== 'GOL' && row.nota !== 0);
 
-      console.log('lista sem goleiros ' + listToTalSemGOL);
+      console.log('lista sem goleiros ' + listFinalSemCafeESemGol);
       console.log('lista de goleiros ' + listGOLs);
       console.log('azul Ant: ' + timeAzul.length + ' amarelo Ant: ' + timeAmarelo.length);
 
-      const shuffledJogadores = arrayShuffle(listToTalSemGOL);
+      const shuffledJogadores = arrayShuffle(listFinalSemCafeESemGol);
       const tempTimeAmarelo: IListagemJogador[] = [];
       const tempTimeAzul: IListagemJogador[] = [];
 
@@ -80,6 +82,15 @@ export const Times: React.FC = () => {
           tempTimeAzul.push(goleiro);
         } else {
           tempTimeAmarelo.push(goleiro);
+        }
+      });
+
+      console.log(listCafesComLeite);
+      listCafesComLeite.forEach((cafeComLeite) => {
+        if (tempTimeAzul.length > tempTimeAmarelo.length) {
+          tempTimeAmarelo.push(cafeComLeite);
+        } else {
+          tempTimeAzul.push(cafeComLeite);
         }
       });
 

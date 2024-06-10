@@ -19,7 +19,7 @@ interface IFormData {
 }
 
 const formValidationSchema: yup.SchemaOf<IFormData> = yup.object().shape({
-  nota: yup.number().required().equals([1, 2, 3, 4, 5]),
+  nota: yup.number().required().equals([0, 1, 2, 3, 4, 5]),
   posicao: yup.string().required().max(3).equals(['ATA','MEI','DEF','GOL']),
   nome: yup.string().required().min(3),
   ativo: yup.boolean().default(true),
