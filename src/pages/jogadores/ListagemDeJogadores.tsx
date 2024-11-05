@@ -31,7 +31,9 @@ export const ListagemDeJogadores: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-
+    localStorage.removeItem('rowSelectionModel');
+    localStorage.removeItem('rows');
+    
     debounce(() => {
       JogadoresService.getAll(pagina, busca)
         .then((result) => {
