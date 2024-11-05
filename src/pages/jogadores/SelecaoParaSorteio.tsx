@@ -28,31 +28,51 @@ export const SelecaoParaSorteio: React.FC = () => {
     return Number(searchParams.get('pagina') || '1');
   }, [searchParams]);
 
-
+  // 1. Carregar dados e seleção salvos no localStorage ao montar o componente
   useEffect(() => {
-    setIsLoading(true);
 
-    debounce(() => {
-      JogadoresService.getAllSelected('true')
-        .then((result) => {
-          setIsLoading(false);
+    const savedRows = localStorage.getItem('rows');
+    const savedSelection = localStorage.getItem('rowSelectionModel');
+    //por enquanto para remover o cache de selecao, tem que ir pra home.
+    
+    if (savedRows) {
+      setRows(JSON.parse(savedRows));
+      setIsLoading(false); // Evita recarregar dados se já existem salvos
+    } else {
+      // Caso `rows` não esteja no localStorage, buscamos do servidor
+      setIsLoading(true);
+      debounce(() => {
+        JogadoresService.getAllSelected('true')
+          .then((result) => {
+            setIsLoading(false);
+            if (result instanceof Error) {
+              alert(result.message);
+            } else {
+              setTotalCount(result.totalCount);
+              setRows(result.data);
+              localStorage.setItem('rows', JSON.stringify(result.data)); // Salva rows no localStorage
+            }
+          });
+      });
+    }
 
-          if (result instanceof Error) {
-            alert(result.message);
-          } else {
-            console.log('disponiveis para serem selecionados');
-            console.log(result);
+    // Carrega seleção salva, se disponível
+    if (savedSelection) {
+      setRowSelectionModel(JSON.parse(savedSelection));
+    }
+  }, []); // Executa apenas uma vez ao montar o componente
 
-            setTotalCount(result.totalCount);
-            setRows(result.data);
-          }
-        });
-    });
-  }, []);
+  // 2. Atualizar `rowSelectionModel` no localStorage sempre que ele mudar
+  useEffect(() => {
+    localStorage.setItem('rowSelectionModel', JSON.stringify(rowSelectionModel));
+  }, [rowSelectionModel]);
 
+  // 3. Atualizar `rows` no localStorage sempre que ele mudar
+  useEffect(() => {
+    localStorage.setItem('rows', JSON.stringify(rows));
+  }, [rows]);
 
   const columns: GridColDef[] = [
-    // { field: 'id', headerName: 'ID', width: 70 },
     { field: 'nome', headerName: 'Nome', width: 130 },
     { field: 'posicao', headerName: 'Posição', width: 70 },
     {
@@ -73,9 +93,11 @@ export const SelecaoParaSorteio: React.FC = () => {
           iconeBotaoNovo='groups3'
           aoClicarEmNovo={() => {
             const jogadores = rowSelectionModel.map((selectedId) =>
-              rows.find((item) => item.id === selectedId));
-
-            navigate('/times', { state: { jogadores: jogadores } });
+              rows.find((item) => item.id === selectedId)
+            );
+            console.log('Jogadores selecionados:');
+            console.log(jogadores);
+            navigate('/times', { state: { jogadores } });
           }}
         />
       }
@@ -91,7 +113,6 @@ export const SelecaoParaSorteio: React.FC = () => {
           columns={columns}
           pagination
           pageSizeOptions={[5, 25, { value: 100, label: 'todos' }]}
-
           checkboxSelection
           onRowSelectionModelChange={(newRowSelectionModel) => {
             setRowSelectionModel(newRowSelectionModel);
@@ -100,6 +121,6 @@ export const SelecaoParaSorteio: React.FC = () => {
           {...rows}
         />
       )}
-    </LayoutBaseDePagina >
+    </LayoutBaseDePagina>
   );
 };

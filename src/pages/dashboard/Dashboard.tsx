@@ -14,6 +14,8 @@ export const Dashboard = () => {
   useEffect(() => {
     setIsLoadingJogadores(true);
     setIsLoadingJogadoresAtivos(true);
+    localStorage.removeItem('rowSelectionModel');
+    localStorage.removeItem('rows');
 
     JogadoresService.getAll(1)
       .then((result) => {
