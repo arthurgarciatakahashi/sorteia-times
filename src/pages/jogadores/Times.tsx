@@ -15,6 +15,7 @@ import {
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { IListagemJogador } from '../../shared/services/api/jogadores/JogadoresService';
+import { IListagemLog, LoggingService } from '../../shared/services/api/logging/LoggingService';
 
 interface ILocationState {
   jogadores: IListagemJogador[];
@@ -31,7 +32,16 @@ export const Times: React.FC = () => {
 
   const [timeAmarelo, setTimeAmarelo] = useState<IListagemJogador[]>([]);
   const [timeAzul, setTimeAzul] = useState<IListagemJogador[]>([]);
-
+  async function createLog(logData: IListagemLog) {
+    try {
+      await LoggingService.create(logData);
+      setIsLoading(false);
+      // Log criado com sucesso
+    } catch (error) {
+      //alert(error.message);
+      alert(error);
+    }
+  }
   useEffect(() => {
     setIsLoading(true);
 
@@ -99,6 +109,23 @@ export const Times: React.FC = () => {
 
       setTimeAmarelo(tempTimeAmarelo);
       setTimeAzul(tempTimeAzul);
+      const nomesJogadoresAmarelo = tempTimeAmarelo.map(jogador => jogador.nome);
+      const nomesJogadoresAzul = tempTimeAzul.map(jogador => jogador.nome);
+
+      const objCombinado = {
+        AMARELO: nomesJogadoresAmarelo.join(', '),
+        AZUL: nomesJogadoresAzul.join(', ')
+      };
+
+      const logData: IListagemLog = {
+        ip_address: '255.255.255.255',
+        response_json:
+          JSON.stringify(objCombinado),
+      };
+      console.log('log dos dados');
+      console.log(logData);
+
+      LoggingService.create(logData);
 
       setIsLoading(false);
     }
