@@ -7,7 +7,8 @@ import {
   Times,
   ListagemDeJogadores,
   DetalheDejogadores,
-  SelecaoParaSorteio
+  SelecaoParaSorteio,
+  ListagemDeLogs
 } from '../pages';
 
 export const AppRoutes = () => {
@@ -26,6 +27,11 @@ export const AppRoutes = () => {
         label: 'Jogadores',
       },
       {
+        icon: 'history',
+        path: '/logs',
+        label: 'Histórico',
+      },
+      {
         icon: 'casino',
         path: '/sorteio',
         label: 'Sortear',
@@ -41,6 +47,7 @@ export const AppRoutes = () => {
       <Route path="/jogadores/detalhe/:id" element={<DetalheDejogadores />} />
 
       <Route path="/sorteio" element={<SelecaoParaSorteio />} />
+      <Route path="/logs" element={<ListagemDeLogs />} />
       <Route path="/times" element={<Times />} />
 
       <Route path="*" element={<Navigate to="/home" />} />
